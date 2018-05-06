@@ -1,0 +1,5 @@
+name: Man10DiscordSync
+version: ${project.version}
+main: red.man10.man10discordsync.Man10DiscordSync
+authors: [Mr_IK]
+description: Man10_DiscordBOT_Plugin
