@@ -29,9 +29,6 @@ public class Discorddata extends ListenerAdapter {
         if(event.getAuthor().getId().equalsIgnoreCase(jda.getSelfUser().getId())){
             return;
         }
-        if(!event.getChannel().getId().equalsIgnoreCase(main.config1.getString("botchannel"))){
-            return;
-        }
         main.cr.Chat(event.getMessage());
     }
     public Guild getserver(){

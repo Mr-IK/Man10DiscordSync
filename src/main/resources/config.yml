@@ -1,12 +1,3 @@
 token: aaa
 serverid: aaa
-botchannel: aaa
-#ここまでbotトークン・チャンネルid設定
-#ここからmysql設定
-mysql:
-  host: localhost
-  user: user
-  pass: password
-  port: 3306
-  db: man10discord
-#ここまでmysql設定
+#ここまでbotトークン・サーバーid設定

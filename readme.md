@@ -48,5 +48,7 @@ Man10DiscordBOTplugin core.
   We will make the rest of the additional functions available for API etc, so thank you.
 ### Update_History
   v1.0.0 作成。この時点ではメッセージの受け取り、送信のみ。
+
   v1.0.1 アプデ。ログインイベントを実装。githubにアップするように。
+
   v1.0.1-2 小アプデ。使いやすいよう少し改造
