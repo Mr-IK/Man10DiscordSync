@@ -12,7 +12,6 @@ import javax.security.auth.login.LoginException;
 public class Man10DiscordSync extends JavaPlugin implements Listener {
     FileConfiguration config1;
     Discorddata discord;
-    MySQLManager mysql;
     Chat_reception cr;
     Login login;
     DiscordAPI api;
@@ -22,7 +21,6 @@ public class Man10DiscordSync extends JavaPlugin implements Listener {
         saveDefaultConfig();
         config1 = getConfig();
         getServer().getPluginManager().registerEvents(this,this);
-        mysql = new MySQLManager(this,"Mdiscord");
         cr = new Chat_reception();
         login = new Login();
         api = new DiscordAPI(this);

@@ -8,10 +8,7 @@ import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
-import org.bukkit.entity.Player;
 import javax.security.auth.login.LoginException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class Discorddata extends ListenerAdapter {
     Man10DiscordSync main;
@@ -47,82 +44,11 @@ public class Discorddata extends ListenerAdapter {
         channel.sendMessage(message).queue();
         return true;
     }
-    public boolean playercreate(Player p,String id) {
-        String sql = "INSERT INTO "+main.mysql.DB+".discord_link (name,uuid,discord_id) VALUES ('"+p.getName()+"' ,'"+p.getUniqueId().toString()+"' , '"+id+"');";
-        boolean done = main.mysql.execute(sql);
-        return done;
-    }
-    public boolean playercontain(Player p) {
-        String sql = "SELECT * FROM "+main.mysql.DB+".discord_link WHERE uuid = '"+p.getUniqueId().toString()+"';";
-        ResultSet rs = main.mysql.query(sql);
-        if(rs==null){
-            return false;
-        }
-        try {
-            if(rs.next()) {
-                // UUIDが一致するユーザが見つかった
-                return true;
-            }
-            return false;
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-            return false;
-        }
-    }
-    public String getdiscordname(Player p) {
-        String sql = "SELECT * FROM "+main.mysql.DB+".discord_link WHERE uuid = '"+p.getUniqueId().toString()+"';";
-        ResultSet rs = main.mysql.query(sql);
-        if(rs==null){
-            return null;
-        }
-        try {
-            if(rs.next()) {
-                // UUIDが一致するユーザが見つかった
-                String discord_id = rs.getString("discord_id");
-                return jda.getUserById(discord_id).getName();
-            }
-            return null;
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-            return null;
-        }
-    }
 
-    public String getdiscordid(Player p) {
-        String sql = "SELECT * FROM "+main.mysql.DB+".discord_link WHERE uuid = '"+p.getUniqueId().toString()+"';";
-        ResultSet rs = main.mysql.query(sql);
-        if(rs==null){
+    public MessageChannel getChannel(String id){
+        if(jda.getTextChannelById(id)==null){
             return null;
         }
-        try {
-            if(rs.next()) {
-                // UUIDが一致するユーザが見つかった
-                String discord_id = rs.getString("discord_id");
-                return discord_id;
-            }
-            return null;
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-            return null;
-        }
-    }
-
-    public String getminecraftname(String discordid) {
-        String sql = "SELECT * FROM "+main.mysql.DB+".discord_link WHERE discord_id = '"+discordid+"';";
-        ResultSet rs = main.mysql.query(sql);
-        if(rs==null){
-            return null;
-        }
-        try {
-            if(rs.next()) {
-                // UUIDが一致するユーザが見つかった
-                String discord_id = rs.getString("name");
-                return jda.getUserById(discord_id).getName();
-            }
-            return null;
-        } catch (SQLException e1) {
-            e1.printStackTrace();
-            return null;
-        }
+        return jda.getTextChannelById(id);
     }
 }
